@@ -1,0 +1,118 @@
+
+<div class="app">
+  <nav class="rail" aria-label="Sezioni">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" rx="9" fill="var(--fg)"/><path d="M12 25c-2.8-1.4-4-4-3.2-6.8.6-2 2.2-3.2 2.6-5.6 1.8 1.2 2.4 3 2.2 4.6 1.2-.8 1.6-2.4 1.4-3.6 2.6 1.8 3.6 5 2.4 7.8-.6 1.5-1.8 2.8-3.4 3.6z" fill="var(--gas-2)"/><path d="M21.5 8l-3.6 8h3l-1.6 8.5 5.4-10h-3.2L24 8z" fill="var(--luce)"/></svg>
+      <div><b>Confronto tariffe bollette</b><small id="rail-sub">Le tue bollette di luce e gas</small></div>
+    </div>
+    <div id="rail-items"></div>
+    <div class="foot" id="rail-foot"></div>
+  </nav>
+  <div style="min-width:0">
+    <header class="top">
+      <div class="wrap">
+        <div class="brand">
+          <svg class="brand-mark" viewBox="0 0 34 34" aria-hidden="true"><rect x="1" y="1" width="32" height="32" rx="9" fill="var(--fg)"/><path d="M12 25c-2.8-1.4-4-4-3.2-6.8.6-2 2.2-3.2 2.6-5.6 1.8 1.2 2.4 3 2.2 4.6 1.2-.8 1.6-2.4 1.4-3.6 2.6 1.8 3.6 5 2.4 7.8-.6 1.5-1.8 2.8-3.4 3.6z" fill="var(--gas-2)"/><path d="M21.5 8l-3.6 8h3l-1.6 8.5 5.4-10h-3.2L24 8z" fill="var(--luce)"/></svg>
+          <div><b>Confronto tariffe bollette</b><small id="brand-sub">Luce e gas</small></div>
+        </div>
+        <span class="ctx" id="ctx">Panoramica</span>
+        <div class="seg casa-seg" id="casa-seg" role="group" aria-label="Casa" hidden></div>
+        <button class="btn primary btn-add" type="button" data-add>+ Bolletta</button>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <div id="banner"></div>
+
+      <section data-sec="pan" aria-labelledby="h-pan">
+        <div class="head"><div><span class="label" id="pan-eyebrow">La tua casa</span><h1 id="h-pan">Come sto andando quest'anno</h1></div><span class="muted num" id="pan-upd"></span></div>
+        <p class="lead" id="pan-lead">Apro i tuoi dati…</p>
+        <div class="grid g4" id="kpis">
+          <div class="panel kpi"><div class="sk" style="width:60%"></div><div class="sk" style="height:34px"></div></div>
+          <div class="panel kpi"><div class="sk" style="width:60%"></div><div class="sk" style="height:34px"></div></div>
+          <div class="panel kpi"><div class="sk" style="width:60%"></div><div class="sk" style="height:34px"></div></div>
+          <div class="panel kpi"><div class="sk" style="width:60%"></div><div class="sk" style="height:34px"></div></div>
+        </div>
+        <div class="grid g2">
+          <div class="panel"><div class="ph"><div><h2>Da tenere a mente</h2><span class="sub">Scadenze, bollette attese, lacune e consumi strani, calcolati dai dati</span></div></div><div class="rem" id="rem"></div></div>
+          <div class="panel"><div class="ph"><h2>Ultime bollette</h2><button class="btn sm" data-goto="bol">Tutte le bollette</button></div><div class="list" id="recent"></div></div>
+        </div>
+        <div class="meters" id="meters"></div>
+        <div class="grid g2">
+          <div class="panel"><div class="ph"><div><h2>Spesa per anno</h2><span class="sub">Totale pagato, canone RAI incluso · bollette a cavallo d'anno ripartite</span></div><span class="keynum" id="k-annual"></span></div><div class="chart"><canvas id="c-annual" aria-label="Spesa per anno"></canvas></div><div class="legend" id="lg-annual"></div></div>
+          <div class="panel"><div class="ph"><div><h2>Consumi mese per mese</h2><span class="sub" id="mon-sub"></span></div><div class="seg" role="group" aria-label="Fornitura"><button type="button" data-mt="gas" aria-pressed="true">Gas</button><button type="button" data-mt="luce" aria-pressed="false">Luce</button></div></div><div class="chart"><canvas id="c-monthly" aria-label="Consumi mensili"></canvas></div><div class="legend" id="lg-monthly"></div></div>
+        </div>
+      </section>
+
+      <section data-sec="bol" aria-labelledby="h-bol" hidden>
+        <div class="head"><div><span class="label" id="bol-eyebrow">Archivio</span><h1 id="h-bol">Bollette</h1></div>
+          <div class="controls">
+            <select id="f-tipo" aria-label="Fornitura"><option value="">Luce e gas</option><option value="gas">Solo gas</option><option value="luce">Solo luce</option></select>
+            <select id="f-anno" aria-label="Anno"><option value="">Tutti gli anni</option></select>
+            <select id="f-off" aria-label="Offerta"><option value="">Tutte le offerte</option></select>
+            <input type="search" id="f-q" placeholder="Cerca n. fattura o note" aria-label="Cerca">
+          </div></div>
+        <p class="lead" id="bol-lead"></p>
+        <div class="tw click only-wide"><table id="tbl"><thead></thead><tbody></tbody><tfoot></tfoot></table></div>
+        <div class="panel only-narrow"><div class="list" id="bol-list"></div></div>
+      </section>
+
+      <section data-sec="con" aria-labelledby="h-con" hidden>
+        <div class="head"><div><span class="label" id="con-eyebrow">La tua casa</span><h1 id="h-con">Consumi e costi</h1></div>
+          <div class="controls"><div class="seg" role="group" aria-label="Fornitura analisi"><button type="button" data-rt="gas" aria-pressed="true">Gas</button><button type="button" data-rt="luce" aria-pressed="false">Luce</button><button type="button" data-rt="tot" aria-pressed="false">Luce + gas</button></div></div></div>
+        <p class="lead" id="con-lead"></p>
+        <div id="con-body"></div>
+      </section>
+
+      <section data-sec="off" aria-labelledby="h-off" hidden>
+        <div class="head"><div><span class="label" id="off-eyebrow">La tua casa</span><h1 id="h-off">Offerte e prezzi</h1></div><div class="controls"><span class="muted" id="of-age" style="font-size:.85rem"></span><button class="btn primary" id="of-add" type="button">Aggiungi offerta</button></div></div>
+        <p class="lead">Quanto spenderesti in un anno per la sola materia prima (prezzo dell'energia più quota fissa di vendita, con l'IVA) con i tuoi consumi di un anno, rispetto a quello che paghi oggi. È l'unica parte della bolletta che cambia da un fornitore all'altro.</p>
+        <div id="off-body"></div>
+      </section>
+
+      <section data-sec="chi" aria-labelledby="h-chi" hidden>
+        <div class="head"><div><span class="label">Domande e risposte</span><h1 id="h-chi">Assistente</h1></div></div>
+        <p class="lead" id="chi-lead"></p>
+        <div id="chi-body"></div>
+      </section>
+
+      <section data-sec="dat" aria-labelledby="h-dat" hidden>
+        <div class="head"><div><span class="label">I tuoi dati</span><h1 id="h-dat">Dati</h1></div>
+          <div class="seg" role="group" aria-label="Scheda dati"><button type="button" data-dt="add" aria-pressed="true">Aggiungi</button><button type="button" data-dt="imp" aria-pressed="false">Copia ed esporta</button><button type="button" data-dt="sta" aria-pressed="false">Case e dati</button></div></div>
+        <div data-dpane="add" class="queue">
+          <div class="controls" style="margin-bottom:2px"><label class="checkline" for="up-casa">Casa <select id="up-casa"></select></label></div>
+          <div class="grid g2 ways">
+            <div class="drop" id="drop">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M28 6H14a4 4 0 0 0-4 4v28a4 4 0 0 0 4 4h20a4 4 0 0 0 4-4V16z"/><path d="M28 6v10h10"/><path d="M24 34V22"/><path d="m19 27 5-5 5 5"/></svg>
+              <h2>Carica le tue bollette</h2>
+              <p class="muted" id="drop-sub" style="max-width:52ch">Anche più di una alla volta: PDF o foto, luce e gas. Claude ne legge i dati e tu controlli prima di salvare.</p>
+              <div class="controls" style="justify-content:center">
+                <label class="btn primary" for="up-file">Scegli i file<input type="file" id="up-file" accept=".pdf,application/pdf,image/*" multiple hidden></label>
+                <button class="btn" id="manual" type="button">Inserisci a mano</button>
+              </div>
+            </div>
+            <div class="drop alt" id="quick">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 38h32"/><path d="M13 32V22M21 32V12M29 32V18M37 32v-7"/></svg>
+              <h2>Conosci già i tuoi consumi?</h2>
+              <p class="muted" style="max-width:52ch">Scrivi quanto consumi in un anno e carica solo l'ultima bolletta: basta per confrontare le offerte. Il consumo annuo è stampato in bolletta.</p>
+              <div class="controls" style="justify-content:center">
+                <label class="btn primary" for="up-last">Carica l'ultima bolletta<input type="file" id="up-last" accept=".pdf,application/pdf,image/*" hidden></label>
+                <button class="btn" id="quick-manual" type="button">Scrivi solo i consumi</button>
+              </div>
+            </div>
+          </div>
+          <div class="privacy" id="privacy-add"></div>
+          <div class="queue" id="queue"></div>
+        </div>
+        <div data-dpane="imp" hidden id="imp-pane"></div>
+        <div data-dpane="sta" hidden id="sta-pane"></div>
+      </section>
+    </main>
+  </div>
+</div>
+<nav class="bottom" id="bottom" aria-label="Sezioni"></nav>
+<button class="fab" type="button" data-add aria-label="Aggiungi bolletta">+</button>
+<div id="sheet-root"></div>
+<div id="modal-root"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
